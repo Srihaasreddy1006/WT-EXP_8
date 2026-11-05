@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment Box</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+    <div ng-controller="FrmController">
+
+        <h2>Post your Comment</h2>
+
+        <textarea ng-model="txtcomment"
+                  placeholder="Your Comment"></textarea>
+        <br><br>
+
+        <button ng-click="btn_add()">Post Comment</button>
+
+        <h3>Comments</h3>
+
+        <ul>
+            <li ng-repeat="comnt in comment">
+                {{ comnt }}
+                <button ng-click="remItem($index)">Delete</button>
+            </li>
+        </ul>
+
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+
+        app.controller("FrmController", function($scope) {
+
+            $scope.comment = [];
+
+            $scope.btn_add = function() {
+                if ($scope.txtcomment != "") {
+                    $scope.comment.push($scope.txtcomment);
+                    $scope.txtcomment = "";
+                }
+            };
+
+            $scope.remItem = function(index) {
+                $scope.comment.splice(index, 1);
+            };
+
+        });
+    </script>
+
+</body>
+</html>

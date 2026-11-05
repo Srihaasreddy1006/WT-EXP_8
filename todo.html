@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="todoApp" ng-controller="todoController">
+
+    <h2>My To-Do List</h2>
+
+    <input type="text" ng-model="title" placeholder="Enter a task">
+
+    <button ng-click="add()">Add</button>
+
+    <h3>Tasks</h3>
+
+    <ul>
+        <li ng-repeat="t in tasks">
+            {{ t }}
+        </li>
+    </ul>
+
+    <script>
+        angular.module("todoApp", [])
+        .controller("todoController", function($scope) {
+
+            $scope.tasks = [];
+
+            $scope.add = function() {
+                if ($scope.title && $scope.title.trim() != "") {
+                    $scope.tasks.push($scope.title);
+                    $scope.title = "";
+                }
+            };
+
+        });
+    </script>
+
+</body>
+</html>
+
